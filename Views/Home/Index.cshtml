@@ -1,0 +1,29 @@
+
+
+@if (User.Identity.IsAuthenticated)
+{
+
+    if (User.IsInRole("Admin"))
+    {
+        <h1> Welcome to Our Clothing Store.</h1>
+        <a asp-action="Index" asp-controller="Products" class="btn btn-success">View our products</a>
+        <a asp-action="Index" asp-controller="Orders" class="btn btn-warning">View Orders</a>
+        <a asp-action="Index" asp-controller="Suppliers" class="btn btn-danger">View Suppliers</a>
+        <a asp-action="Index" asp-controller="RoleAdmin" class="btn btn-info">Manage Users</a>
+    }
+
+    if (User.IsInRole("Customer"))
+    {
+        <h1> Welcome to my clothing store.</h1>
+        <a asp-action="Index" asp-controller="Products" class="btn btn-success">View our products</a>
+        <a asp-action="Index" asp-controller="Orders" class="btn btn-warning">View Orders</a>
+
+    }
+
+}
+
+else
+{
+    <h1> Welcome to my clothing store.</h1>
+    <a asp-action="Index" asp-controller="Products" class="btn btn-success">View our products</a>
+}

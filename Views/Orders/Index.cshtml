@@ -1,0 +1,188 @@
+@model IEnumerable<Ramirez_Mackenzie_HW5.Models.Order>
+
+@{ ViewData["Title"] = "Index"; }
+
+<h1>Index</h1>
+
+@*
+
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderNotes)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderNotes)
+        </td>
+        <td>
+            <a asp-action="Edit" asp-route-id="@item.OrderID">Edit</a> |
+            <a asp-action="Details" asp-route-id="@item.OrderID">Details</a> |
+            <a asp-action="Delete" asp-route-id="@item.OrderID">Delete</a>
+        </td>
+    </tr>}
+        </tbody>
+    </table>
+
+*@
+
+
+
+
+
+@if (User.Identity.IsAuthenticated)
+{
+
+            if (User.IsInRole("Admin"))
+            {
+
+            <table class="table">
+
+            <thead>
+
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OrderNumber)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.OrderDate)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.OrderNotes)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.OrderTotal)
+                    </th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderNotes)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderTotal)
+                    </td>
+
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.OrderID">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.OrderID">Details</a>
+                    </td>
+                </tr>}
+            </tbody>
+
+            </table>
+
+            }
+
+
+            if (User.IsInRole("Customer"))
+            {
+
+            <p>
+            <a asp-action="Create">Create New</a>
+            </p>
+
+            <table class="table">
+
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OrderNumber)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OrderDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OrderNotes)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OrderTotal)
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderNotes)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderTotal)
+                    </td>
+
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.OrderID">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.OrderID">Details</a>
+                    </td>
+
+
+                </tr>
+
+            }
+            </tbody>
+
+            </table>
+
+            }
+
+
+ }
+
+else
+
+{
+
+
+<div class="nav-item">
+    <a asp-controller="Account" asp-action="Index" class="nav-link">Log In</a>
+</div>
+
+
+
+}

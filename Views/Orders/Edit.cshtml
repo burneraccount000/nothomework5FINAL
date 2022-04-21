@@ -1,0 +1,99 @@
+@model Ramirez_Mackenzie_HW5.Models.Order
+
+@{ ViewData["Title"] = "Edit"; }
+
+<h1>Edit</h1>
+
+<h4>Order</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+
+        <form asp-action="Edit">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="OrderID" />
+
+            @* ORDER NUMBER *@
+            <div class="form-group">
+                <label asp-for="OrderNumber" class="control-label"></label>
+                @Html.DisplayFor(Model => Model.OrderNumber, new { @class = "form-control" })
+            </div>
+
+            @* FIRST NAME *@
+            <div class="form-group">
+                <label asp-for="User.FirstName" class="control-label">First Name:</label>
+                @Html.DisplayFor(Model => Model.User.FirstName, new { @class = "form-control" })
+            </div>
+
+            @* LAST NAME *@
+            <div>
+                <label asp-for="User.LastName" class="control-label">Last Name:</label>
+                @Html.DisplayFor(Model => Model.User.LastName, new { @class = "form-control" })
+            </div>
+
+            @* EMAIL *@
+            <div class="form-group">
+                <label asp-for="User.Email" class="control-label">Email:</label>
+                @Html.DisplayFor(Model => Model.User.Email, new { @class = "form-control" })
+            </div>
+
+            @* ORDER DATE *@
+            <div class="form-group">
+                <label asp-for="OrderDate" class="control-label"></label>
+                @Html.DisplayFor(Model => Model.OrderDate, new { @class = "form-control" })
+            </div>
+
+            @* ORDER NOTES *@
+            <div class="form-group">
+                <label asp-for="OrderNotes" class="control-label"></label>
+                <input asp-for="OrderNotes" class="form-control" />
+                <span asp-validation-for="OrderNotes" class="text-danger"></span>
+            </div>
+
+            <p> </p/>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+
+        </form>
+
+    </div>
+
+    <p> </p>
+    <h5>Order Details</h5>
+    <table class="table table-primary">
+
+        <tr>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Extended Price</th>
+        </tr>
+
+        @foreach (OrderDetail od in Model.OrderDetails)
+        {
+<tr>
+    <td>@Html.DisplayFor(ModelItem => od.Product.Name)</td>
+    <td>@Html.DisplayFor(ModelItem => od.ProductPrice)</td>
+    <td>@Html.DisplayFor(ModelItem => od.Quantity)</td>
+    <td>@Html.DisplayFor(ModelItem => od.ExtendedPrice)</td>
+</tr>}
+
+    </table>
+
+</div>
+
+<hr />
+<div>
+
+    <a asp-action="Index" asp-controller="Orders" class="btn btn-info">Back to List</a>
+
+    <a asp-action="Create" asp-controller="OrderDetails" asp-route-orderID="@Model.OrderID" class="btn btn-warning">Add Item</a>
+
+    <a asp-action="Index" asp-controller="OrderDetails" asp-route-orderID="@Model.OrderID" class="btn btn-danger">Edit Existing Item</a>
+
+</div>
+
